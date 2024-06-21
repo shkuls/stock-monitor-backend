@@ -19,7 +19,7 @@ const client_secret = process.env.CLIENT_SECRET;
 const redirect_url = process.env.REDIRECT_URL;
 
 app.get("/" ,(req,res)=>{
-  res.sendFile("./welcome.html" ,{root: __dirname });
+  res.sendFile(path.join(__dirname, './welcome.html'));
 } )
 
 app.get("/login", (req, res) => {
@@ -50,7 +50,7 @@ app.get("/redirect*", (req, res) => {
       .then((response) => {
         access_token = response.data.access_token;
         isLoggedin = true;
-        res.sendFile("./success.html" ,{root: __dirname });
+        res.sendFile(path.join(__dirname, './success.html'));
       })
       .catch((error) => {
         console.log(error);
