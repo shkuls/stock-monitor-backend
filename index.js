@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const path = require('path')
 const app = express();
 const axios = require("axios");
 const qs = require("qs");
@@ -22,8 +23,8 @@ app.get("/" ,(req,res)=>{
 } )
 
 app.get("/login", (req, res) => {
-  res.redirect(
-    `https://api.upstox.com/v2/login/authorization/dialog?client_id=${client_id}&redirect_uri=${redirect_url}`
+  res.redirect(path.join(`https://api.upstox.com/v2/login/authorization/dialog?client_id=${client_id}&redirect_uri=` , redirect_url)
+    
   ); //allows the user to login and redirects to to redirect_uri as provided in the upstox app
 });
 
