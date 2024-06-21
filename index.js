@@ -8,8 +8,6 @@ const qs = require('qs');
 dotenv.config({
     path : "./.env", 
 })
-
-// app.use(cors());
 app.use(bodyParser.json());
 app.use(cors())
 
@@ -30,8 +28,8 @@ app.get("/redirect*" , (req,res)=>{
 
       const authCode = req.query.code; 
       const data={
-          client_id: "81119962-dd1c-4422-a44d-26c566b51a08" ,
-  client_secret: "4i5qrjv19v" , 
+          client_id: `${client_id}` ,
+  client_secret: `${client_secret}` , 
   code: `${authCode}` , 
   redirect_uri: "http://localhost:8000/redirect",
   grant_type: "authorization_code"
@@ -47,6 +45,7 @@ app.get("/redirect*" , (req,res)=>{
   .then((response) => {
     
     access_token = response.data.access_token;
+    isLoggedin = true;
     res.send("you have been logged in! , open the extension from the top")
     
     
@@ -66,14 +65,10 @@ app.get("/redirect*" , (req,res)=>{
 
 })
 
-app.get("/getAccess" , (req,res)=>{
-  //I need to ensure that not everyone can acccess this route - set 
-  // if(req.body.pwd === process.env.ACCESS_PWD)
-  // console.log(access_token)
+app.get("/getLogin" , (req,res)=>{
   res.send(access_token);
-  // else
-  // res.send("Invalid access pwd");
 })
+
 
 
 
