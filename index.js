@@ -23,7 +23,7 @@ app.get("/" ,(req,res)=>{
 
 app.get("/login", (req, res) => {
   res.redirect(
-    `https://api.upstox.com/v2/login/authorization/dialog?client_id=${client_id}&redirect_uri=${redirect_url}}`
+    `https://api.upstox.com/v2/login/authorization/dialog?client_id=${client_id}&redirect_uri=${redirect_url}`
   ); //allows the user to login and redirects to to redirect_uri as provided in the upstox app
 });
 
