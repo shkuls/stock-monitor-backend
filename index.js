@@ -15,10 +15,15 @@ app.use(cors());
 var access_token = null;
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
+const redirect_url = process.env.REDIRECT_URL;
+
+app.get("/" ,(req,res)=>{
+  res.sendFile("./welcome.html" ,{root: __dirname });
+} )
 
 app.get("/login", (req, res) => {
   res.redirect(
-    `https://api.upstox.com/v2/login/authorization/dialog?client_id=${client_id}&redirect_uri=http://localhost:8000/redirect`
+    `https://api.upstox.com/v2/login/authorization/dialog?client_id=${client_id}&redirect_uri=${redirect_url}}`
   ); //allows the user to login and redirects to to redirect_uri as provided in the upstox app
 });
 
@@ -29,7 +34,7 @@ app.get("/redirect*", (req, res) => {
       client_id: `${client_id}`,
       client_secret: `${client_secret}`,
       code: `${authCode}`,
-      redirect_uri: "http://localhost:8000/redirect",
+      redirect_uri: `${redirect_url}`,
       grant_type: "authorization_code",
     };
     const url = "https://api.upstox.com/v2/login/authorization/token";
