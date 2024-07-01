@@ -9,7 +9,7 @@ const qs = require("qs");
 dotenv.config({
   path: "./.env",
 });
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname , public)));
 app.use(bodyParser.json());
 app.use(cors());
 
